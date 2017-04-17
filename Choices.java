@@ -5,38 +5,42 @@ import java.util.Scanner;
 /**
  * Created by elee on 4/17/2017.
  */
+
+
 public class Choices {
+    /**
+     Summary:
+     Create a question with users named file, question, choices.
+     */
     public static void Choices() //Working as of 4/12/2017
     {
         String tempSurvey = "tmpSurvey\\";
-        Scanner optionChoice = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
         List<String> optionChoiceList = new ArrayList<String>();
         String[] optionChoiceResult = new String[optionChoiceList.size()];
         String[] blank = {};
         char quit = 'Y';
         int i =0; //how many times a loop ran
 
-        System.out.println("Once you start creating your file Type \"quit\" to go back. You can't go back after starting a question.'");
+        System.out.println("Once you start creating your file Type \"quit\" to go back. You can't go back after starting a question.");
         System.out.println("Enter the name of the file: ");
-        Scanner fileNameChoices = new Scanner(System.in);
-        String fileNameChoicesValue = fileNameChoices.nextLine();
+        String fileNameChoicesValue = scan.nextLine();
         if(fileNameChoicesValue.equals("quit")) //go back.
         {
             Create.CreateSurvey();
         }
         System.out.println("Enter the prompt for your multiple choice question:"); //Get choice question
-        Scanner questionChoice = new Scanner(System.in);
-        String questionChoiceValue = questionChoice.nextLine();
+        String questionChoiceValue = scan.nextLine();
 
 
         while(quit != 'N') //exit the loop so that the user can have as many options
         {
             System.out.println("Enter choices "+ i + "."); //Get choice options
-            String optionChoiceValue = optionChoice.nextLine(); //gets user choice
+            String optionChoiceValue = scan.nextLine(); //gets user choice
             optionChoiceList.add(optionChoiceValue); //add to the list
 
             System.out.println("Enter another option? (Y/N)"); //It actually takes any inputs. If value starts with N, then that's another story.
-            String word = fileNameChoices.next(); //Get the next user input
+            String word = scan.next(); //Get the next user input
             word = word.toUpperCase(); //change to uppercase if lowercase
             quit = word.charAt(0); //if it's N, then leave
             i++;
@@ -52,40 +56,41 @@ public class Choices {
         Create.CreateSurvey(); //go back to creating the survey.
     }
 
+    /**
+     Summary:
+     Create a question with users named file, question, choices and answers
+     */
     public static void TestChoices()
     {
         String tempTest = "tmpTest\\";
-        Scanner optionChoice = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
         List<String> optionChoiceList = new ArrayList<String>();
         String[] optionChoiceResult = new String[optionChoiceList.size()];
-        Scanner answerChoice = new Scanner(System.in);
         List<String> answerChoiceList = new ArrayList<String>();
         String[] answerChoiceResult = {};
 
         char quit = 'Y';
         int i =0;
 
-        System.out.println("Once you start creating your file Type \"quit\" to go back. You can't go back after starting a question.'");
+        System.out.println("Once you start creating your file Type \"quit\" to go back. You can't go back after starting a question.");
         System.out.println("Enter the name of the file: ");
-        Scanner fileNameBool = new Scanner(System.in);
-        String fileNameValue = fileNameBool.nextLine();
+        String fileNameValue = scan.nextLine();
         if(fileNameValue.equals("quit"))
         {
             Create.CreateTest();
         }
         System.out.println("Enter the prompt for your multiple choice question:"); //Get choice question
-        Scanner questionChoice = new Scanner(System.in);
-        String questionChoiceValue = questionChoice.nextLine();
+        String questionChoiceValue = scan.nextLine();
 
 
         while(quit != 'N') //exit the loop so that the user can have as many options
         {
             System.out.println("Enter choices "+ i+1 + "."); //Get choice options
-            String optionChoiceValue = optionChoice.nextLine(); //gets user choice
+            String optionChoiceValue = scan.nextLine(); //gets user choice
             optionChoiceList.add(optionChoiceValue); //add to the list
 
             System.out.println("Enter another option? (Y/N)"); //It actually takes any inputs. If value starts with N, then that's another story.
-            String word = questionChoice.next(); //Get the next user input
+            String word = scan.next(); //Get the next user input
             word = word.toUpperCase(); //change to uppercase if lowercase
             quit = word.charAt(0); //if it's N, then leave
             i++;
@@ -97,7 +102,7 @@ public class Choices {
         while(quit != 'N')
         {
             System.out.println("Enter answer/s " + i+1 +"."); //Get choice answers
-            String answerChoiceValue = answerChoice.nextLine();
+            String answerChoiceValue = scan.nextLine();
             answerChoiceList.add(answerChoiceValue);
             //ISSUE HERE - - - - - - - FIX LATER - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - -
             //Check if the answer choice is part of the options.
@@ -110,7 +115,7 @@ public class Choices {
             }
 
             System.out.println("Enter another option? (Y/N)"); //It actually takes any inputs. If value starts with N, then that's another story.
-            String word = questionChoice.next(); //Get the next user input
+            String word = scan.next(); //Get the next user input
             word = word.toUpperCase(); //change to uppercase if lowercase
             quit = word.charAt(0); //if it's N, then leave
             i++;
