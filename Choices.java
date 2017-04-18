@@ -35,8 +35,9 @@ public class Choices {
 
         while(quit != 'N') //exit the loop so that the user can have as many options
         {
-            System.out.println("Enter choices "+ i + "."); //Get choice options
-            String optionChoiceValue = scan.nextLine(); //gets user choice
+            System.out.println("Enter choices "+ (i+1) + "."); //Get choice options
+            Scanner scan2 = new Scanner(System.in); //Another scanner so that it stops here every run.
+            String optionChoiceValue = scan2.nextLine(); //gets user choice
             optionChoiceList.add(optionChoiceValue); //add to the list
 
             System.out.println("Enter another option? (Y/N)"); //It actually takes any inputs. If value starts with N, then that's another story.
@@ -45,14 +46,13 @@ public class Choices {
             quit = word.charAt(0); //if it's N, then leave
             i++;
         }
-        while(i > 0) {
-            optionChoiceResult = optionChoiceList.toArray(optionChoiceResult); //populate the array
-            i--;
-        }
+
+        optionChoiceResult = optionChoiceList.toArray(optionChoiceResult); //populate the array
+
 
         WriteToFile.CreateWrite(questionChoiceValue, optionChoiceResult, blank, fileNameChoicesValue, tempSurvey);
 
-        System.out.println("question created.");
+        System.out.println("Question created.");
         Create.CreateSurvey(); //go back to creating the survey.
     }
 
@@ -85,7 +85,7 @@ public class Choices {
 
         while(quit != 'N') //exit the loop so that the user can have as many options
         {
-            System.out.println("Enter choices "+ i+1 + "."); //Get choice options
+            System.out.println("Enter choices " + (i+1) + "."); //Get choice options
             String optionChoiceValue = scan.nextLine(); //gets user choice
             optionChoiceList.add(optionChoiceValue); //add to the list
 
@@ -95,13 +95,12 @@ public class Choices {
             quit = word.charAt(0); //if it's N, then leave
             i++;
         }
-        while(i > 0) {
-            optionChoiceResult = optionChoiceList.toArray(optionChoiceResult); //populate the array
-            i--;
-        }
+        optionChoiceResult = optionChoiceList.toArray(optionChoiceResult); //populate the array
+
+        i = 0;
         while(quit != 'N')
         {
-            System.out.println("Enter answer/s " + i+1 +"."); //Get choice answers
+            System.out.println("Enter answer/s " + (i+1) +"."); //Get choice answers
             String answerChoiceValue = scan.nextLine();
             answerChoiceList.add(answerChoiceValue);
             //ISSUE HERE - - - - - - - FIX LATER - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - -
@@ -120,10 +119,9 @@ public class Choices {
             quit = word.charAt(0); //if it's N, then leave
             i++;
         }
-        while(i > 0) {
-            answerChoiceResult = answerChoiceList.toArray(answerChoiceResult); //populate the array
-            i--;
-        }
+
+        answerChoiceResult = answerChoiceList.toArray(answerChoiceResult); //populate the array
+
 
         WriteToFile.CreateWrite(questionChoiceValue, optionChoiceResult, answerChoiceResult, fileNameValue, tempTest);
 
