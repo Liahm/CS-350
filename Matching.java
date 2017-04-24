@@ -156,7 +156,7 @@ public class Matching {
 
         optionMatchResult = optionMatchList.toArray(optionMatchResult);
 
-        //----------------------------Answer-------------------------------------- BUGGED
+        //----------------------------Answer--------------------------------------
         /** This version gathers all the answers and forces the creator to only make 1 connection between each value
         int number = 0;
         if(all >= i) {
@@ -186,6 +186,7 @@ public class Matching {
         quit = 'Y'; //Reuse quit variable
         i = 0;
         //Gather all the answers, no matter how many times it's required to be connected.
+        //It also gathers ANY type of answer, even if they are outside the range.
         while(quit != 'N') //exit the loop so that the user can have as many options
         {
             System.out.println("Enter Answers " + (i + 1) + "."); //Get choice options

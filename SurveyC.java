@@ -56,7 +56,7 @@ public class SurveyC {
                 break;
             default :
                 System.out.println("Please enter a valid value \n");
-                Survey.main(args);
+                SurveyC();
 
         }
     }

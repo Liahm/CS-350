@@ -16,7 +16,9 @@ public class WriteToFile {
         try {
             new File(directory).mkdirs(); //Create temp folder
             List<String> quest = Arrays.asList("Question:", question, "Options:",  Arrays.toString(options), "Answer: ", Arrays.toString(answer)); //Create a list of questions and answers
+
             Path file = Paths.get(directory+fileName + ".txt"); //get the file name
+            System.out.println(file);
             Files.write(file, quest, Charset.forName("UTF-8")); //write all the strings in the list into the file.
         }
         catch(IOException e)
