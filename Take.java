@@ -5,6 +5,7 @@ public class Take {
     public static void TakeSurvey() //HW3
     {
         System.out.println("Not ready until Homework 3");
+        SurveyC.SurveyC();
     }
 
     public static void TakeTest() //HW3
@@ -17,5 +18,7 @@ public class Take {
         //check if answer is the same. if Yes, add +1, if no nothing.
         //Loop it until eof
         //Give score that should be #questions / correct - or just don't since we have a gradetest, which should be only for essay
+        Test.Test();
+
     }
 }
