@@ -1,11 +1,9 @@
-import java.io.File;
-import java.io.FileFilter;
+import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.IOException;
 import java.util.List;
-import java.nio.file.StandardCopyOption;
+
 /**
  * Created by elee on 4/17/2017.
  */
@@ -23,6 +21,7 @@ public class Save { //I STILL REQUIRE TO FINISH THIS - LOOK INTO THE COPY FILES 
     public static void SaveSurvey() //HW2
     {
         String name = "Survey";
+        String tempfolder = "tmpSurvey";
         char yn = 'Y';
         File x = new File(".\\"+name);
         File[] xs =x.listFiles(new FileFilter() { //Getting the directories number
@@ -31,13 +30,16 @@ public class Save { //I STILL REQUIRE TO FINISH THIS - LOOK INTO THE COPY FILES 
                 return pathname.isDirectory();
             }
         });
-        count = xs.length; //Count = the amount of direectories in the current directory
-        if(count <= 0)
-            count = 0;
         new File(name).mkdirs();
         new File(name+"\\"+name+count).mkdirs();
         File f;
         File in;
+
+        count = xs.length; //Count = the amount of directories in the current directory;
+        if(count <= 0)
+            count = 0;
+
+
         try {
             Scanner scan = new Scanner(System.in);
             System.out.println("Do you want to save the file?(Y/N)");
@@ -51,24 +53,38 @@ public class Save { //I STILL REQUIRE TO FINISH THIS - LOOK INTO THE COPY FILES 
             }
 
             if (yn == 'Y') {
-                f = new File(".\\"+name+"\\"+name+count+"\\"+name+count+".txt");
-                in = new File(".\\tmpSurvey\\checking out scanner.txt");//Insert the first .txt file or find a way to copy all in 1
-                if (!f.exists()) {
-                    //Loop around here to cat all files
-                    //===================Copy files to another directory==================
-                    File fileCopy = new File(".\\"+name+"\\"+name+count+"\\");
-                    //====================================================================
-                    Files.copy(in.toPath(), f.toPath()); //Currently copying one file and one file only
-                    //====================================================================
-                    f.createNewFile();
-                     //Everything goes into f
-                    count++;
+                File folder = new File(".\\"+tempfolder); //Get the directory name
+                File[] listOfFiles = folder.listFiles(); //List all the files from the directory
+                try { //Try statement to check if there are any files still inside of the temp folder.
+                    f = new File(".\\" + name + "\\" + name + count + "\\" + listOfFiles[0].getName()); //The current folder name
+                    if (!f.exists()) {
+                        for (int i = 0; i < listOfFiles.length; i++) {
+                            f = new File(".\\" + name + "\\" + name + count + "\\" + listOfFiles[i].getName()); //output file
+                            in = new File(".\\tmpSurvey\\" + listOfFiles[i].getName()); //tmp file
 
-                } else {
-                    //Loop around here to parse all files, literally the same as above
-                    f = new File(".\\"+name+"\\"+name+count+"\\"+name+count+".txt");
-                    f.createNewFile();
-                    count++;
+                            //Still need to concat all files into 1
+
+                            Files.copy(in.toPath(), f.toPath()); //Copy to the new folder
+                            listOfFiles[i].delete(); //Delete the current file.
+                        }
+
+                        count++;
+
+                    } else {
+                        //Loop around here to parse all files, literally the same as above
+                        f = new File(".\\" + name + "\\" + name + count + "\\" + name + count + ".txt");
+                        f.createNewFile();
+                        count++;
+                    }
+                }
+                catch (IndexOutOfBoundsException e) {
+                    System.out.println("All files are already saved");
+                    String[]entries = x.list();
+                    for(String s: entries){ //Delete the folder that was created because the class was initialized
+                        File currentFile = new File(x.getPath(),s);
+                        currentFile.delete(); //Delete the currentFile.
+                    }
+                    SurveyC.SurveyC();
                 }
 
             }
