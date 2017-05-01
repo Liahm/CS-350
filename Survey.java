@@ -6,10 +6,7 @@ public class Survey {
 
     public static void main(String[] args) //initial procedure
     {
-        System.out.println("Welcome");
-        System.out.println("1) Survey Menu.");
-        System.out.println("2) Test Menu.");
-        System.out.println("E) Exit.");
+        Output.intro();
 
         Scanner input = new Scanner(System.in);
         String firstValue = input.nextLine();
