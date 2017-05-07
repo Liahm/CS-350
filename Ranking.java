@@ -48,7 +48,7 @@ public class Ranking {
 
         optionRankResult = optionRankList.toArray(optionRankResult); //populate array
 
-        WriteToFile.CreateWrite(questionRankValue, optionRankResult, blank, fileNameRankValue, tempSurvey);
+        WriteToFile.CreateWrite(questionRankValue, optionRankResult, blank, fileNameRankValue,"Ranking", tempSurvey);
 
         System.out.println("Question created.");
         Create.CreateSurvey(); //go back to creating the survey.
@@ -98,12 +98,13 @@ public class Ranking {
         optionRankResult = optionRankList.toArray(optionRankResult); //populate array
 
         System.out.println("Enter the answer in order separated by a \">\"");
-        String answer = scan.nextLine();
+        Scanner scan2 = new Scanner(System.in); //Another scanner so that it stops here every run.
+        String answer = scan2.nextLine();
         answarRankList.add(answer);
 
         answarRankResult = answarRankList.toArray(answarRankResult);
 
-        WriteToFile.CreateWrite(questionRankValue, optionRankResult, answarRankResult, fileNameValue, tempTest);
+        WriteToFile.CreateWrite(questionRankValue, optionRankResult, answarRankResult, fileNameValue, "Ranking", tempTest);
 
         System.out.println("Question created.");
         Create.CreateTest(); //go back to creating the survey.

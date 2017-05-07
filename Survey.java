@@ -2,11 +2,9 @@ import java.util.Scanner;
 import java.lang.String;
 
 public class Survey {
-
-
     public static void main(String[] args) //initial procedure
     {
-        Output.intro();
+        Output.intro(1);
 
         Scanner input = new Scanner(System.in);
         String firstValue = input.nextLine();
@@ -25,7 +23,7 @@ public class Survey {
                 Exit.Exit();
                 break;
             default:
-                System.out.println("Please enter a valid value \n"); //print this out if input is invalid and repeat.
+                Output.invalidInput();
                 main(args);
         }
     }

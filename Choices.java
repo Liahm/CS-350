@@ -50,7 +50,7 @@ public class Choices {
         optionChoiceResult = optionChoiceList.toArray(optionChoiceResult); //populate the array
 
 
-        WriteToFile.CreateWrite(questionChoiceValue, optionChoiceResult, blank, fileNameChoicesValue, tempSurvey);
+        WriteToFile.CreateWrite(questionChoiceValue, optionChoiceResult, blank, fileNameChoicesValue,"Multiple-Choices",tempSurvey);
 
         System.out.println("Question created.");
         Create.CreateSurvey(); //go back to creating the survey.
@@ -86,7 +86,8 @@ public class Choices {
         while(quit != 'N') //exit the loop so that the user can have as many options
         {
             System.out.println("Enter choices " + (i+1) + "."); //Get choice options
-            String optionChoiceValue = scan.nextLine(); //gets user choice
+            Scanner scan2 = new Scanner(System.in);
+            String optionChoiceValue = scan2.nextLine(); //gets user choice
             optionChoiceList.add(optionChoiceValue); //add to the list
 
             System.out.println("Enter another option? (Y/N)"); //It actually takes any inputs. If value starts with N, then that's another story.
@@ -97,21 +98,14 @@ public class Choices {
         }
         optionChoiceResult = optionChoiceList.toArray(optionChoiceResult); //populate the array
 
+        quit = 'Y';
         i = 0;
         while(quit != 'N')
         {
             System.out.println("Enter answer/s " + (i+1) +"."); //Get choice answers
-            String answerChoiceValue = scan.nextLine();
+            Scanner scan2 = new Scanner(System.in);
+            String answerChoiceValue = scan2.nextLine();
             answerChoiceList.add(answerChoiceValue);
-            //ISSUE HERE - - - - - - - FIX LATER - - - - - - - - - - - - - - - - - - - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - -
-            //Check if the answer choice is part of the options.
-            if(!answerChoiceValue.equals(optionChoiceResult))
-            { //possible bug when comparing. If answer isn't one of the options, then error. This will not fix it.
-                System.out.println("That answer is outside of the scope, please input a correct one.");
-                //Add something that will delete that newest input.
-                //Debug line before and after that change just to check if it deleted the correct one.
-                //Then this will fix it.
-            }
 
             System.out.println("Enter another option? (Y/N)"); //It actually takes any inputs. If value starts with N, then that's another story.
             String word = scan.next(); //Get the next user input
@@ -123,7 +117,7 @@ public class Choices {
         answerChoiceResult = answerChoiceList.toArray(answerChoiceResult); //populate the array
 
 
-        WriteToFile.CreateWrite(questionChoiceValue, optionChoiceResult, answerChoiceResult, fileNameValue, tempTest);
+        WriteToFile.CreateWrite(questionChoiceValue, optionChoiceResult, answerChoiceResult, fileNameValue, "Multiple-Choices",tempTest);
 
         System.out.println("question created.");
         Create.CreateTest();

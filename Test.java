@@ -8,15 +8,7 @@ public class Test {
     {
         String[] args={};
 
-        System.out.println("1) Create a new Test.");
-        System.out.println("2) Display a Test.");
-        System.out.println("3) Load a Test.");
-        System.out.println("4) Save a Test.");
-        System.out.println("5) Edit a Test."); //HW3
-        System.out.println("6) Take a Test."); //HW3
-        System.out.println("7) Grade a Test."); //HW3
-        System.out.println("8) Back.");
-        System.out.println("E) Exit"); //8, e, E, Exit, exit will work
+        Output.intro(3);
 
         Scanner input = new Scanner(System.in);
         String testValue = input.nextLine();
@@ -26,13 +18,13 @@ public class Test {
                 Create.CreateTest();//HW2
                 break;
             case "2":
-                Display.DisplayTest();//HW2
+                Display.Display("Test");//HW2
                 break;
             case "3":
-                Load.LoadTest();//HW2
+                Load.Load("Test","tmpTest");//HW2
                 break;
             case "4":
-                Save.SaveTest();//HW2
+                Save.Save("Test", "tmpTest");//HW2
                 break;
             case "5":
                 Edit.EditTest();//HW3
@@ -56,7 +48,7 @@ public class Test {
                 Exit.Exit();
                 break;
             default :
-                System.out.println("Please enter a valid value \n");
+                Output.invalidInput();
                 Test();
 
         }

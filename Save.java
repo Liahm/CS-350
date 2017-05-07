@@ -1,13 +1,12 @@
 import java.io.*;
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.List;
+
 
 /**
  * Created by elee on 4/17/2017.
  */
-public class Save { //I STILL REQUIRE TO FINISH THIS - LOOK INTO THE COPY FILES PART
+public class Save { //Completed on 5/3/2017 - Long hiatus
     /**
      * Summary:
      * Create a folder that will not be overwritten and a new file that isn't overwritten either.
@@ -18,67 +17,119 @@ public class Save { //I STILL REQUIRE TO FINISH THIS - LOOK INTO THE COPY FILES 
      * Delete temp file.
      */
     public static long count = 0; //Make it "count" how many folders exist and then +1 it.
-    public static void SaveSurvey() //HW2
+    public static int fileNumber = 1; //Count how many files exist. Starts at 1 so that question 1 would be named question 1.
+    public static void Save(String name, String tempFolder) //HW2
     {
-        String name = "Survey";
-        String tempfolder = "tmpSurvey";
+        String newLine = System.getProperty("line.separator");//This will retrieve line separator dependent on OS.
         char yn = 'Y';
-        File x = new File(".\\"+name);
+        File x = new File(".\\"+name); //Path to survey folder
+        if(!x.exists())
+        {
+            x.mkdir();
+        }
+
         File[] xs =x.listFiles(new FileFilter() { //Getting the directories number
             @Override
             public boolean accept(File pathname) {
                 return pathname.isDirectory();
             }
         });
-        new File(name).mkdirs();
-        new File(name+"\\"+name+count).mkdirs();
-        File f;
-        File in;
 
         count = xs.length; //Count = the amount of directories in the current directory;
         if(count <= 0)
             count = 0;
 
+        new File(name).mkdirs();
+        new File(name+"\\"+name+count).mkdirs();
+        File f;
+        File in;
+
+        File catName = new File(".\\"+name+"\\" +name+count+"\\"+name+count+".txt"); //cat file name
 
         try {
             Scanner scan = new Scanner(System.in);
-            System.out.println("Do you want to save the file?(Y/N)");
+            Output.saveFile();
             String input = scan.nextLine();
             input = input.toUpperCase(); //Make whatever the input was into a capitalized word
+
             if(!input.equals(""))
                 yn = input.charAt(0); //Get the first letter
             else {
-                System.out.println("Incorrect Input, \"Empty String\" detected.");
-                SaveSurvey(); //Repeat
+                Output.emptyInput();
+                Save(name, tempFolder); //Repeat
             }
 
             if (yn == 'Y') {
-                File folder = new File(".\\"+tempfolder); //Get the directory name
+                File folder = new File(".\\"+tempFolder); //Get the temp directory name
                 File[] listOfFiles = folder.listFiles(); //List all the files from the directory
                 try { //Try statement to check if there are any files still inside of the temp folder.
                     f = new File(".\\" + name + "\\" + name + count + "\\" + listOfFiles[0].getName()); //The current folder name
                     if (!f.exists()) {
-                        for (int i = 0; i < listOfFiles.length; i++) {
+                        //==========This section move files from point A to B=====================
+                        for (int i = 0; i < listOfFiles.length; i++)
+                        {
+                            if(listOfFiles[i].getName().startsWith(name)) //This will delete the old Survey/Test concatenated file.
+                            {
+                                listOfFiles[i].delete();
+                                i++;
+                            }
                             f = new File(".\\" + name + "\\" + name + count + "\\" + listOfFiles[i].getName()); //output file
-                            in = new File(".\\tmpSurvey\\" + listOfFiles[i].getName()); //tmp file
-
-                            //Still need to concat all files into 1
-
+                            in = new File(".\\"+tempFolder+"\\" + listOfFiles[i].getName()); //tmp file
+                            // first = new File(".\\tmpSurvey\\" + listOfFiles[0].getName());
                             Files.copy(in.toPath(), f.toPath()); //Copy to the new folder
+
+                            //=====================This entire section Concats files===========================================
+                            BufferedWriter bw = null;
+                            FileWriter fw = null;
+                            FileReader fr = null;
+                            BufferedReader br = null;
+                            try {
+                                if (!catName.exists()) {
+                                    catName.createNewFile();
+                                }
+                                // true = append file
+                                fw = new FileWriter(catName.getAbsoluteFile(), true); //Get file write to and reading from
+                                bw = new BufferedWriter(fw);
+                                fr = new FileReader(in);
+                                br = new BufferedReader(fr);
+
+                                String sCurrentLine;
+                                br = new BufferedReader(new FileReader(in));
+                                bw.write(fileNumber+ ") "); //Writing the first question number
+                                while((sCurrentLine = br.readLine())!= null)
+                                    bw.write(sCurrentLine + newLine);//Printing line by line
+                                fileNumber++;
+                                bw.write(newLine); //Printing a new line at the end of the x file to make space
+                            }finally { //Close all files
+                                try {
+                                    if (bw != null)
+                                        bw.close();
+                                    if (fw != null)
+                                        fw.close();
+                                    if (fr != null)
+                                        fr.close();
+                                    if (br != null)
+                                        br.close();
+                                } catch (IOException ex) {
+                                    ex.printStackTrace();
+                                }
+                            }
+                            //=================================================================================================
                             listOfFiles[i].delete(); //Delete the current file.
                         }
-
+                        //==========It also deletes the files from the original location=============
                         count++;
 
                     } else {
-                        //Loop around here to parse all files, literally the same as above
+                        //This should create a new folder if the folder already exists
+                        System.out.println("I actually don't think it ever comes in here. If it does, please tell me");
                         f = new File(".\\" + name + "\\" + name + count + "\\" + name + count + ".txt");
                         f.createNewFile();
                         count++;
                     }
                 }
                 catch (IndexOutOfBoundsException e) {
-                    System.out.println("All files are already saved");
+                    Output.saved();
                     String[]entries = x.list();
                     for(String s: entries){ //Delete the folder that was created because the class was initialized
                         File currentFile = new File(x.getPath(),s);
@@ -90,8 +141,8 @@ public class Save { //I STILL REQUIRE TO FINISH THIS - LOOK INTO THE COPY FILES 
             }
             else if(yn != 'N' && yn != 'Y')
             {
-                System.out.println("Incorrect Input, please retry.");
-                SaveSurvey(); //Input was incorrect, retry
+                Output.incorrectInput();
+                Save(name, tempFolder); //Input was incorrect, retry
             }
             else //This deletes the folder that I created at the start of the method
             {//It should only happen if the first character input was N
@@ -108,44 +159,7 @@ public class Save { //I STILL REQUIRE TO FINISH THIS - LOOK INTO THE COPY FILES 
         catch(IOException e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Returning to Survey options, please retry. \n");
-            SurveyC.SurveyC();
-        }
-
-    }
-
-    public static void SaveTest() //HW2
-    {
-        String name = "Test";
-        new File(name).mkdirs();
-        new File(name+"\\"+name+count).mkdirs();
-        System.out.println(count);
-        try {
-
-            //File file3 = new File(".\\Survey\\Survey" + count + "\\" + name + count + ".txt");
-            Scanner scan = new Scanner(System.in);
-
-            System.out.println("Do you want to save the file?(Y/N)");
-            String input = scan.nextLine();
-            input.toUpperCase();
-            File f;
-            f = new File(".\\"+name+count);
-            if (input.equals('Y')) {
-                if (!f.exists()) {
-                    //Loop around here
-
-                    f.createNewFile();
-                } else {
-                    count++;
-                    SaveSurvey();
-                }
-            }
-            Test.Test();
-        }
-        catch(IOException e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Returning to Test options, please retry. \n");
+            Output.returningOptions(name);
             SurveyC.SurveyC();
         }
 

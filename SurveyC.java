@@ -7,15 +7,7 @@ public class SurveyC {
     public static void SurveyC()
     {
         String[] args={};
-        System.out.println("1) Create a new Survey."); //HW2
-        System.out.println("2) Display a Survey."); //HW2
-        System.out.println("3) Load a Survey."); //HW2
-        System.out.println("4) Save a Survey."); //HW2
-        System.out.println("5) Edit a Survey."); //HW3
-        System.out.println("6) Take a Survey."); //HW3
-        System.out.println("7) Grade a Survey."); //HW3
-        System.out.println("8) Back.");
-        System.out.println("E) Exit."); //8, e, E, Exit, exit will work
+        Output.intro(2);
 
         Scanner input = new Scanner(System.in);
         String surveyValue = input.nextLine();
@@ -25,13 +17,13 @@ public class SurveyC {
                 Create.CreateSurvey();//HW2
                 break;
             case "2":
-                Display.DisplaySurvey();//HW2
+                Display.Display("Survey");//HW2
                 break;
             case "3":
-                Load.LoadSurvey();//HW2
+                Load.Load("Survey", "tmpSurvey");//HW2
                 break;
             case "4":
-                Save.SaveSurvey();//HW2
+                Save.Save("Survey", "tmpSurvey");//HW2
                 break;
             case "5":
                 Edit.EditSurvey();//HW3
@@ -55,7 +47,7 @@ public class SurveyC {
                 Exit.Exit();
                 break;
             default :
-                System.out.println("Please enter a valid value \n");
+                Output.invalidInput();
                 SurveyC();
 
         }

@@ -26,7 +26,7 @@ public class Bool {
         System.out.println("Enter the prompt for your True/False question:"); //Replace prompt to question?
         String questionBoolValue = scan.nextLine(); //Are these supposed to be 1 question per file or multiple?
 
-        WriteToFile.CreateWrite(questionBoolValue, tF, answerBoolValue, fileNameValue, tempSurvey);
+        WriteToFile.CreateWrite(questionBoolValue, tF, answerBoolValue, fileNameValue, "T-F",tempSurvey);
         System.out.println("question created.");
         Create.CreateSurvey(); //go back to creating the survey.
     }
@@ -59,10 +59,10 @@ public class Bool {
                 answerBoolValue[0] = scan.nextLine();
                 //System.out.println(answerBoolValue[0]);//debug
             }while(!answerBoolValue[0].equals("t") && !answerBoolValue[0].equals("T") && !answerBoolValue[0].equals("true") && !answerBoolValue[0].equals("True") && !answerBoolValue[0].equals("f") && !answerBoolValue[0].equals("F") && !answerBoolValue[0].equals("false") && !answerBoolValue[0].equals("False") && !answerBoolValue[0].equals("TRUE") && !answerBoolValue[0].equals("FALSE"));
-            WriteToFile.CreateWrite(questionBoolValue, tF, answerBoolValue, fileNameValue, tempTest); //write to file
+            WriteToFile.CreateWrite(questionBoolValue, tF, answerBoolValue, fileNameValue, "T-F",tempTest); //write to file
         }
         else
-            WriteToFile.CreateWrite(questionBoolValue, tF, answerBoolValue, fileNameValue, tempTest);
+            WriteToFile.CreateWrite(questionBoolValue, tF, answerBoolValue, fileNameValue,"T-F", tempTest);
         System.out.println("question created.");
         Create.CreateTest(); //go back to creating the Test.
 

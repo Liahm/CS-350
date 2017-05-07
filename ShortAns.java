@@ -25,7 +25,7 @@ public class ShortAns {
         System.out.println("Enter the prompt for your short answer question:");
         String questionShortValue = scan.nextLine(); //Get user question
 
-        WriteToFile.CreateWrite(questionShortValue, blank, blank, fileNameShortAnsValue, tempSurvey); //Print to file
+        WriteToFile.CreateWrite(questionShortValue, blank, blank, fileNameShortAnsValue, "Short-Answer",tempSurvey); //Print to file
         System.out.println("question created.");
         Create.CreateSurvey(); //Go back
     }
@@ -52,7 +52,7 @@ public class ShortAns {
         System.out.println("Enter correct Answer");
         String[] answerShortValue = {scan.nextLine()}; //Get user answer
 
-        WriteToFile.CreateWrite(questionShortValue, blank, answerShortValue, fileNameValue, tempTest);
+        WriteToFile.CreateWrite(questionShortValue, blank, answerShortValue, fileNameValue, "Short-Answer",tempTest);
         System.out.println("question created.");
         Create.CreateTest();
     }

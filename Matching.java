@@ -79,7 +79,7 @@ public class Matching {
         optionMatchResult = optionMatchList.toArray(optionMatchResult);
 
 
-        WriteToFile.CreateWrite(questionMatchValue, optionMatchResult, blank, fileNameChoicesValue, tempSurvey);
+        WriteToFile.CreateWrite(questionMatchValue, optionMatchResult, blank, fileNameChoicesValue, "Matching",tempSurvey);
 
         System.out.println("question created.");
         Create.CreateSurvey(); //go back to creating the survey.
@@ -203,7 +203,7 @@ public class Matching {
 
         Answers = AnswerList.toArray(Answers);
         //----------------------------Printing------------------------------------
-        WriteToFile.CreateWrite(questionMatchValue, optionMatchResult, Answers, fileNameChoicesValue, tempTest);
+        WriteToFile.CreateWrite(questionMatchValue, optionMatchResult, Answers, fileNameChoicesValue, "Matching",tempTest);
 
         System.out.println("question created.");
         Create.CreateSurvey(); //go back to creating the survey.

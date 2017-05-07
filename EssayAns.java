@@ -24,7 +24,7 @@ public class EssayAns {
         }
         System.out.println("Enter the prompt for your essay answer question:");
         String questionEssayValue = Scan.nextLine(); //get question
-        WriteToFile.CreateWrite(questionEssayValue, blank, blank, fileNameEssayAnsValue, tempSurvey); //print to file
+        WriteToFile.CreateWrite(questionEssayValue, blank, blank, fileNameEssayAnsValue,"Essay",tempSurvey); //print to file
         System.out.println("question created.");
         Create.CreateSurvey(); //return
     }
@@ -48,7 +48,7 @@ public class EssayAns {
         System.out.println("Enter the prompt for your essay answer question:");
         String questionEssayValue = Scan.nextLine();
 
-        WriteToFile.CreateWrite(questionEssayValue, blank, blank, fileNameValue, tempTest); //Essay has no answer or options
+        WriteToFile.CreateWrite(questionEssayValue, blank, blank, fileNameValue, "Essay",tempTest); //Essay has no answer or options
         System.out.println("question created.");
         Create.CreateTest();
     }
