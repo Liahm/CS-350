@@ -17,9 +17,10 @@ public class Load {
      * You could also say, load files from espcified folder
      * That's it.
      */
-    public static void Load(String name, String tmpFile) //HW2 - load to memory
+
+    public static void Load(String name, String tmpFile,boolean turnOn) //HW2 - load to memory
     {
-        File x = new File(".\\"+name); //Path to survey folder
+        File x = new File("./"+name); //Path to survey folder
         if(!x.exists())
         {
             x.mkdir();
@@ -44,7 +45,7 @@ public class Load {
         Scanner scan = new Scanner(System.in); //get the file name
         String loadingValue = scan.nextLine();
 
-        File loadingFile = new File(x+"\\"+loadingValue);
+        File loadingFile = new File(x+"/"+loadingValue);
 
         if(!loadingFile.exists())
         {
@@ -58,8 +59,8 @@ public class Load {
         File[] listOfFiles = loadingFile.listFiles();
         try {
             for (int i = 0; i < listOfFiles.length; i++) {
-                File in = new File(loadingFile + "\\" + listOfFiles[i].getName()); //input file
-                File out = new File(".\\"+tmpFile+"\\"+ listOfFiles[i].getName()); //output file
+                File in = new File(loadingFile + "/" + listOfFiles[i].getName()); //input file
+                File out = new File("./"+tmpFile+"/"+ listOfFiles[i].getName()); //output file
                 Files.copy(in.toPath(), out.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
             }
@@ -73,16 +74,16 @@ public class Load {
                 Test.Test();
         }
 
-
-        if(name == "Survey")
-            SurveyC.SurveyC();
-        else if(name == "Test")
-            Test.Test();
-        else
-        {
-            String[] args = {};
-            Output.noClue();
-            Survey.main(args);
+        if(turnOn) {
+            if (name == "Survey")
+                SurveyC.SurveyC();
+            else if (name == "Test")
+                Test.Test();
+            else {
+                String[] args = {};
+                Output.noClue();
+                Survey.main(args);
+            }
         }
     }
 

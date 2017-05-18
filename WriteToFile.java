@@ -24,12 +24,12 @@ public class WriteToFile {
         catch(IOException e)
         {
             System.out.println("File Read Error: " + e.getMessage());
-            if(directory == "tmpSurvey\\")
+            if(directory == "tmpSurvey/")
             {
                 System.out.println("Returning to Survey options");
                 Create.CreateSurvey();
             }
-            else if(directory == "tmpTest\\")
+            else if(directory == "tmpTest/")
             {
                 System.out.println("Returning to Test options");
                 Create.CreateSurvey();

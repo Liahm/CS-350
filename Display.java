@@ -13,7 +13,7 @@ public class Display { //Completed 5/3/2017
     {
         Scanner scan = new Scanner(System.in); //get the file name
         File loadingFile;
-        File x = new File(".\\"+name); //Path to survey folder
+        File x = new File("./"+name); //Path to survey folder
         if(!x.exists())
         {
             x.mkdir();
@@ -42,7 +42,7 @@ public class Display { //Completed 5/3/2017
             Display(name);
         }
 
-        loadingFile = new File(x + ".\\" + loadingValue); //Add the user selected option to the File
+        loadingFile = new File(x + "./" + loadingValue); //Add the user selected option to the File
         if (!loadingFile.exists()) //Check if the folder exist
         {
             Output.noFolder(1);
@@ -63,13 +63,13 @@ public class Display { //Completed 5/3/2017
             Output.emptyInput();
             Display(name);
         }
-        File valueFile = new File(loadingFile+"\\"+fileValue);
+        File valueFile = new File(loadingFile+"/"+fileValue);
         while(!valueFile.exists())
         {
             Output.noFolder(2);
             Output.loadInfo(2);
             fileValue = scan.nextLine();
-            valueFile = new File(loadingFile+"\\"+fileValue);
+            valueFile = new File(loadingFile+"/"+fileValue);
         }
         try
         {

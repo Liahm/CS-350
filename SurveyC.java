@@ -20,10 +20,10 @@ public class SurveyC {
                 Display.Display("Survey");//HW2
                 break;
             case "3":
-                Load.Load("Survey", "tmpSurvey");//HW2
+                Load.Load("Survey", "tmpSurvey", true);//HW2
                 break;
             case "4":
-                Save.Save("Survey", "tmpSurvey");//HW2
+                Save.Save("Survey", "tmpSurvey", true);//HW2
                 break;
             case "5":
                 Edit.EditSurvey();//HW3
@@ -32,7 +32,7 @@ public class SurveyC {
                 Take.TakeSurvey();//HW3
                 break;
             case "7":
-                Grade.GradeSurvey();//HW3
+                Grade.TabulateSurvey();//HW3
                 break;
             case "8":
             case "back":

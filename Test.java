@@ -21,10 +21,10 @@ public class Test {
                 Display.Display("Test");//HW2
                 break;
             case "3":
-                Load.Load("Test","tmpTest");//HW2
+                Load.Load("Test","tmpTest", true);//HW2
                 break;
             case "4":
-                Save.Save("Test", "tmpTest");//HW2
+                Save.Save("Test", "tmpTest", true);//HW2
                 break;
             case "5":
                 Edit.EditTest();//HW3
@@ -33,14 +33,17 @@ public class Test {
                 Take.TakeTest();//HW3
                 break;
             case "7":
-                Grade.GradeTest();//HW3
+                Grade.TabulateTest();//HW3
                 break;
             case "8":
+                Grade.GradeTest();//HW3
+                break;
+            case "9":
             case "back":
             case "b":
                 Survey.main(args);
                 break;
-            case "9":
+            case "0":
             case "e":
             case "E":
             case "exit":

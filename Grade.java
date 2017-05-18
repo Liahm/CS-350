@@ -2,7 +2,7 @@
  * Created by elee on 4/17/2017.
  */
 public class Grade {
-    public static void GradeSurvey() //HW3
+    public static void TabulateSurvey() //HW3
     {
         System.out.println("Not ready until Homework 3");
         SurveyC.SurveyC();
@@ -16,6 +16,10 @@ public class Grade {
         //save score in another file
         //not sure how scoring works for now
         Test.Test();
+    }
+
+    public static void TabulateTest()
+    {
 
     }
 }

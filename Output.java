@@ -55,12 +55,20 @@ public abstract class Output {
     {
         System.out.println("Incorrect Input, \"Empty String\" detected.");
     }
-    public static void saveFile()
+    public static void saveFile(int choice)
     {
-        System.out.println("Do you want to save the file?(Y/N)");
+        switch (choice)
+        {
+            case 1:
+                System.out.println("Do you want to save the file?(Y/N)");
+                break;
+            case 2:
+                System.out.println("Files saved" + newLine);
+                break;
+        }
+
     }
-    public static void invalidInput()
-    {
+    public static void invalidInput() {
         System.out.println("Please enter a valid value" +newLine); //print this out if input is invalid and repeat.
     }
     public static void loadInfo(int choice)
@@ -106,6 +114,38 @@ public abstract class Output {
                 System.out.println("==============================================");
                 System.out.println("All the folders from " + name);
                 System.out.println("==============================================");
+                break;
+        }
+    }
+    public static void EditPhrases(int choice)
+    {
+        switch (choice) {
+            case 1:
+                System.out.println("Files found, do you want to Delete/Save files or Ignore (D/S/I)?");
+                break;
+            case 2:
+                System.out.println("Would you like to load a folder?");
+                break;
+            case 3:
+                System.out.println("Please select folder to load");
+                break;
+            case 4:
+                System.out.println("Which file would like like to edit?");
+                break;
+            case 5:
+                System.out.println("Do you want to edit the Question/Options?");
+                break;
+            case 6:
+                System.out.println("Do you want to edit the Question/Options/Answer? (Q/O/A)");
+                break;
+            case 7:
+                System.out.println("You can't modify options for True and false questions");
+                break;
+            case 8:
+                System.out.println("You can't modify options for essay questions");
+                break;
+            case 9:
+                System.out.println("You can't modify options for short answer questions");
                 break;
         }
     }

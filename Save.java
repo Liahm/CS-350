@@ -18,11 +18,11 @@ public class Save { //Completed on 5/3/2017 - Long hiatus
      */
     public static long count = 0; //Make it "count" how many folders exist and then +1 it.
     public static int fileNumber = 1; //Count how many files exist. Starts at 1 so that question 1 would be named question 1.
-    public static void Save(String name, String tempFolder) //HW2
+    public static void Save(String name, String tempFolder, boolean turnOn) //HW2
     {
         String newLine = System.getProperty("line.separator");//This will retrieve line separator dependent on OS.
         char yn = 'Y';
-        File x = new File(".\\"+name); //Path to survey folder
+        File x = new File("./"+name); //Path to survey folder
         if(!x.exists())
         {
             x.mkdir();
@@ -40,15 +40,15 @@ public class Save { //Completed on 5/3/2017 - Long hiatus
             count = 0;
 
         new File(name).mkdirs();
-        new File(name+"\\"+name+count).mkdirs();
+        new File(name+"/"+name+count).mkdirs();
         File f;
         File in;
 
-        File catName = new File(".\\"+name+"\\" +name+count+"\\"+name+count+".txt"); //cat file name
+        File catName = new File("./"+name+"/" +name+count+"/"+name+count+".txt"); //cat file name
 
         try {
             Scanner scan = new Scanner(System.in);
-            Output.saveFile();
+            Output.saveFile(1);
             String input = scan.nextLine();
             input = input.toUpperCase(); //Make whatever the input was into a capitalized word
 
@@ -56,14 +56,14 @@ public class Save { //Completed on 5/3/2017 - Long hiatus
                 yn = input.charAt(0); //Get the first letter
             else {
                 Output.emptyInput();
-                Save(name, tempFolder); //Repeat
+                Save(name, tempFolder, turnOn); //Repeat
             }
 
             if (yn == 'Y') {
-                File folder = new File(".\\"+tempFolder); //Get the temp directory name
+                File folder = new File("./"+tempFolder); //Get the temp directory name
                 File[] listOfFiles = folder.listFiles(); //List all the files from the directory
                 try { //Try statement to check if there are any files still inside of the temp folder.
-                    f = new File(".\\" + name + "\\" + name + count + "\\" + listOfFiles[0].getName()); //The current folder name
+                    f = new File("./" + name + "/" + name + count + "/" + listOfFiles[0].getName()); //The current folder name
                     if (!f.exists()) {
                         //==========This section move files from point A to B=====================
                         for (int i = 0; i < listOfFiles.length; i++)
@@ -73,8 +73,8 @@ public class Save { //Completed on 5/3/2017 - Long hiatus
                                 listOfFiles[i].delete();
                                 i++;
                             }
-                            f = new File(".\\" + name + "\\" + name + count + "\\" + listOfFiles[i].getName()); //output file
-                            in = new File(".\\"+tempFolder+"\\" + listOfFiles[i].getName()); //tmp file
+                            f = new File("./" + name + "/" + name + count + "/" + listOfFiles[i].getName()); //output file
+                            in = new File("./"+tempFolder+"/" + listOfFiles[i].getName()); //tmp file
                             // first = new File(".\\tmpSurvey\\" + listOfFiles[0].getName());
                             Files.copy(in.toPath(), f.toPath()); //Copy to the new folder
 
@@ -123,7 +123,7 @@ public class Save { //Completed on 5/3/2017 - Long hiatus
                     } else {
                         //This should create a new folder if the folder already exists
                         System.out.println("I actually don't think it ever comes in here. If it does, please tell me");
-                        f = new File(".\\" + name + "\\" + name + count + "\\" + name + count + ".txt");
+                        f = new File("./" + name + "/" + name + count + "/" + name + count + ".txt");
                         f.createNewFile();
                         count++;
                     }
@@ -142,7 +142,7 @@ public class Save { //Completed on 5/3/2017 - Long hiatus
             else if(yn != 'N' && yn != 'Y')
             {
                 Output.incorrectInput();
-                Save(name, tempFolder); //Input was incorrect, retry
+                Save(name, tempFolder, turnOn); //Input was incorrect, retry
             }
             else //This deletes the folder that I created at the start of the method
             {//It should only happen if the first character input was N
@@ -154,7 +154,9 @@ public class Save { //Completed on 5/3/2017 - Long hiatus
                 }
                 SurveyC.SurveyC(); //End it.
             }
-            SurveyC.SurveyC(); //End
+            Output.saveFile(2);
+            if(turnOn)
+                SurveyC.SurveyC(); //End
         }
         catch(IOException e)
         {
