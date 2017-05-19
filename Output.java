@@ -139,14 +139,18 @@ public abstract class Output {
                 System.out.println("Do you want to edit the Question/Options/Answer? (Q/O/A)");
                 break;
             case 7:
-                System.out.println("You can't modify options for True and false questions");
+                System.out.println("You can't modify options for this question");
                 break;
             case 8:
-                System.out.println("You can't modify options for essay questions");
+                System.out.println("Do you want to Delete/Add/");
+            case 10:
+                System.out.println("Please write the new question.");
                 break;
-            case 9:
-                System.out.println("You can't modify options for short answer questions");
+            case 11:
+                System.out.println("Edit saved" + newLine);
                 break;
+            case 12:
+                System.out.println("Please write the");
         }
     }
 }

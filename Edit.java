@@ -1,6 +1,9 @@
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -78,9 +81,11 @@ public class Edit {
         //================================================================
 
         //=======================Choose file==============================
+
         Scanner scan = new Scanner(System.in);
         String loadFile = scan.nextLine();
         File fileValue = new File(out +"/"+ loadFile);
+
         try
         {
             BufferedReader br = new BufferedReader(new FileReader(fileValue));
@@ -101,35 +106,81 @@ public class Edit {
 
         //=============================Edit=============================== //Things to do here - actually edit it
         try {
-            char gg;
-            Output.EditPhrases(6);
+            char gg; //random char to get first character of a string
+            Output.EditPhrases(5);
             Scanner scan2 = new Scanner(System.in);
-            String loadDecision = scan2.nextLine();
+            String loadDecision = scan2.nextLine(); //Get users decision (Question, option, answer
             loadDecision = loadDecision.toUpperCase();
             gg = loadDecision.charAt(0);
 
             switch (gg){
-                case 'Q':
-                    String question = Files.readAllLines(Paths.get(fileValue.toString())).get(1); //get second line
+                case 'Q': //Edit questions
+                    try {
+                        Output.EditPhrases(10);
+                        Scanner scan3 = new Scanner(System.in);
+                        String newQuestion = scan3.nextLine(); //get new edited question
+
+                        String question = Files.readAllLines(Paths.get(fileValue.toString())).get(1); //get question line
+
+                        List<String> fileContent = new ArrayList<>(Files.readAllLines(fileValue.toPath(), StandardCharsets.UTF_8));
+                        for(int i = 0; i< fileContent.size(); i++) //read line by line
+                        {
+                            if(fileContent.get(i).equals(question)) //If the line is the same as the question line, then change it.
+                            {
+                                fileContent.set(i, newQuestion);
+                                break;
+                            }
+                        }
+                        Files.write(fileValue.toPath(), fileContent, StandardCharsets.UTF_8); //write to file.
+                    }catch(Exception e)
+                    {
+                        System.out.println(e);
+                    }
+                    Output.EditPhrases(11);
                     break;
-                case 'O':
-                    if(fileValue.toString().startsWith("T-F"))
+                case 'O': // Edit options
+                    String options = Files.readAllLines(Paths.get(fileValue.toString())).get(3);
+                    List<String> fileContent = new ArrayList<>(Files.readAllLines(fileValue.toPath(), StandardCharsets.UTF_8));
+                    if(fileContent.get(3).equals("") || fileContent.get(3).equals("T/F")) //Files with no options or t/f will not be able to change their option
                     {
                         Output.EditPhrases(7);
                         break;
                     }
-                    else if(fileValue.toString().startsWith("Essay"))
-                    {
+                    String typeOption;
+                    char op; //random char to get first character of a string
+                    do { //Get the user's decision to delete or add an item to the array.
                         Output.EditPhrases(8);
-                        break;
-                    }
-                    else if(fileValue.toString().startsWith("Short"))
+                        Scanner scan3 = new Scanner(System.in);
+                        typeOption = scan3.nextLine();
+                        typeOption = typeOption.toUpperCase();
+                        op = typeOption.charAt(0); //get either s or d
+                    }while(op != 'D' || op != 'A');
+
+                    if(op == 'D')
                     {
-                        Output.EditPhrases(9);
-                        break;
+
                     }
+                    else if(op == 'A')
+                    {
+
+                    }
+                    Scanner scan3 = new Scanner(System.in);
+                    String newOption = scan3.nextLine(); //get new edited question
+
+                    String question = Files.readAllLines(Paths.get(fileValue.toString())).get(3); //get Option line
+
+                    for(int i = 0; i< fileContent.size(); i++) //read line by line
+                    {
+                        if(fileContent.get(i).equals(question)) //If the line is the same as the question line, then change it.
+                        {
+                            fileContent.set(i, newOption);
+                            break;
+                        }
+                    }
+                    Files.write(fileValue.toPath(), fileContent, StandardCharsets.UTF_8); //write to file.
                     String Option1 = Files.readAllLines(Paths.get(fileValue.toString())).get(3); //separate by tab
                     break;
+
             }
 
 
@@ -141,7 +192,7 @@ public class Edit {
         }
         //================================================================
 
-        System.out.println("Not ready until Homework 3");
+        System.out.println("potato patata end everything");
         SurveyC.SurveyC();
     }
 

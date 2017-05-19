@@ -15,7 +15,7 @@ public class WriteToFile {
     {
         try {
             new File(directory).mkdirs(); //Create temp folder
-            List<String> quest = Arrays.asList("Question:", question, "Options:",  Arrays.toString(options), "Answer: ", Arrays.toString(answer)); //Create a list of questions and answers
+            List<String> quest = Arrays.asList("Question:", question, "Options:",  Arrays.toString(options).replace("[", "").replace("]", ""), "Answer: ", Arrays.toString(answer).replace("[", "").replace("]", "")); //Create a list of questions and answers
 
             Path file = Paths.get(directory+ questionType +"-"+fileName + ".txt"); //get the file name
             System.out.println(file);
